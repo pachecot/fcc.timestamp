@@ -14,10 +14,7 @@ var Months = [
     "October",
     "November",
     "December",
-].reduce(function (a, v, i) {
-    a[v] = i;
-    return a;
-}, {});
+];
 
 var getDateInfo = function (d) {
     return {
