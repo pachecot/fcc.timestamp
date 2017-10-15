@@ -1,8 +1,7 @@
+var express = require("express");
+var app = express();
 
-import * as express from "express"
-const app = express();
-
-enum Months {
+var Months = [
     "January",
     "February",
     "March",
@@ -15,35 +14,36 @@ enum Months {
     "October",
     "November",
     "December",
-}
+].reduce(function (a, v, i) {
+    a[v] = i;
+    return a;
+}, {});
 
-const getDateInfo = (d: Date) => {
+var getDateInfo = function (d) {
     return {
         "unix": d.valueOf() / 1000,
-        "natural": `${Months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
+        "natural": Months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear()
     };
 };
 
-const fromUnix = (v: number) => new Date(v);
-
-const fromString = (v: string) => new Date(v);
-
-const parseDate = (id: string) => {
-    const v = Number.parseInt(id);
+var fromUnix = function (v) { return new Date(v); }
+var fromString = function (v) { return new Date(v); }
+var parseDate = function (id) {
+    var v = Number.parseInt(id);
     return isNaN(v) ?
         fromString(id) : fromUnix(v * 1000);
 }
 
 app.get('/:id?', function (req, res) {
-    const id = req.params.id;
+    var id = req.params.id;
     if (!id) {
         res.send();
     }
     else {
-        const d = parseDate(id);
+        var d = parseDate(id);
         res.send(getDateInfo(d));
     }
-})
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

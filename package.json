@@ -4,7 +4,7 @@
   "description": "FCC Timestamp Microservice",
   "main": "index.js",
   "scripts": {
-    "start": "node lib/index.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "MIT",
