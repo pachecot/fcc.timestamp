@@ -34,7 +34,10 @@ var parseDate = function (id) {
 app.get('/:id?', function (req, res) {
     var id = req.params.id;
     if (!id) {
-        res.send();
+        res.send({
+            "unix": null,
+            "natural": null
+        });
     }
     else {
         var d = parseDate(id);
